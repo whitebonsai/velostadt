@@ -1,0 +1,73 @@
+---
+title: E-Scooter Verleih ERM
+---
+erDiagram
+direction LR
+
+ANBIETER ||--o{ FAHRZEUGE : besitzt
+FAHRZEUGTYP ||--o{ FAHRZEUGE : klassifiziert
+
+BENUTZER ||--o{ ZAHLUNGSMITTEL : hat
+BENUTZER ||--o{ FAHRT : macht
+FAHRZEUGE ||--o{ FAHRT : wird_genutzt_in
+
+FAHRT ||--o| ABRECHNUNG : hat
+ZAHLUNGSMITTEL ||--o{ ABRECHNUNG : wird_verwendet_fuer
+
+BENUTZER {
+    int benutzer_id PK
+    string vorname
+    string nachname
+    string e_mail "UNIQUE"
+    string passwort_hash
+}
+
+ZAHLUNGSMITTEL {
+    int zahlungsmittel_id PK
+    int benutzer_id FK
+    string typ
+    string details
+}
+
+FAHRZEUGE {
+    int fahrzeug_id PK
+    int anbieter_id FK
+    int fahrzeugtyp_id FK
+    int akku_prozent
+    string status
+    float gps_lat
+    float gps_long
+    string qr_code "UNIQUE"
+}
+
+FAHRZEUGTYP {
+    int fahrzeugtyp_id PK
+    string bezeichnung
+    float basispreis
+    float preis_pro_min
+}
+
+ANBIETER {
+    int anbieter_id PK
+    string name
+    string e_mail "UNIQUE"
+    string passwort_hash
+}
+
+FAHRT {
+    int fahrt_id PK
+    int fahrzeug_id FK
+    int benutzer_id FK
+    datetime startzeit
+    datetime endzeit
+    float kilometer
+    float preis
+}
+
+ABRECHNUNG {
+    int transaktion_id PK
+    int fahrt_id FK "UNIQUE"
+    int zahlungsmittel_id FK
+    float betrag
+    datetime zeitpunkt
+}

@@ -1,0 +1,26 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb-velostadt
+
+    environment:
+      MARIADB_ROOT_PASSWORD: "P4_DbW3!V3l0St@dt"
+      MARIADB_DATABASE: "velostadt"
+      MARIADB_USER: "velouser"
+      MARIADB_PASSWORD: "velopass"
+      TZ: Europe/Zurich
+
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/initdb:/docker-entrypoint-initdb.d
+
+    ports:
+      - "3306:3306"
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pP4_DbW3!V3l0St@dt"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

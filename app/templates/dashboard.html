@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Dashboard – Velostadt{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Dashboard</h2>
+  <span class="text-muted">Hallo, {{ current_user.vollname }}</span>
+</div>
+
+{% if aktive_fahrt %}
+<div class="card border-success mb-4">
+  <div class="card-header bg-success text-white fw-bold">Aktive Fahrt</div>
+  <div class="card-body">
+    <p class="mb-1">
+      <strong>Fahrzeug:</strong>
+      {{ aktive_fahrt.fahrzeug.fahrzeugtyp.bezeichnung }}
+      (QR: <code>{{ aktive_fahrt.fahrzeug.qr_code[:8] }}…</code>)
+    </p>
+    <p class="mb-3">
+      <strong>Gestartet:</strong> {{ aktive_fahrt.startzeit.strftime('%d.%m.%Y %H:%M') }} Uhr
+    </p>
+    <form method="post" action="{{ url_for('fahrten.fahrt_stop', fahrt_id=aktive_fahrt.fahrt_id) }}">
+      <div class="mb-3 col-md-4">
+        <label class="form-label">Gefahrene Kilometer</label>
+        <input type="number" name="kilometer" class="form-control" min="0" step="0.1" value="0" required>
+      </div>
+      <button type="submit" class="btn btn-danger">Fahrt beenden &amp; abrechnen</button>
+    </form>
+  </div>
+</div>
+{% else %}
+<div class="alert alert-info">
+  Keine aktive Fahrt.
+  <a href="{{ url_for('fahrten.verfuegbare_fahrzeuge') }}" class="alert-link">Jetzt ein Fahrzeug ausleihen</a>.
+</div>
+{% endif %}
+
+<div class="row g-3 mt-2">
+  <div class="col-md-4">
+    <a href="{{ url_for('fahrten.verfuegbare_fahrzeuge') }}" class="card text-decoration-none border-0 shadow-sm h-100">
+      <div class="card-body text-center py-4">
+        <i class="bi bi-bicycle fs-2 mb-2 d-block text-primary"></i>
+        <div class="fw-semibold">Fahrzeug ausleihen</div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{{ url_for('fahrten.meine_fahrten') }}" class="card text-decoration-none border-0 shadow-sm h-100">
+      <div class="card-body text-center py-4">
+        <i class="bi bi-journal-text fs-2 mb-2 d-block text-primary"></i>
+        <div class="fw-semibold">Meine Fahrten</div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{{ url_for('fahrten.zahlungsmittel') }}" class="card text-decoration-none border-0 shadow-sm h-100">
+      <div class="card-body text-center py-4">
+        <i class="bi bi-credit-card fs-2 mb-2 d-block text-primary"></i>
+        <div class="fw-semibold">Zahlungsmittel</div>
+        {% if current_user.zahlungsmittel_list %}
+          <small class="text-success">{{ current_user.zahlungsmittel_list | length }} hinterlegt</small>
+        {% else %}
+          <small class="text-danger">Keines hinterlegt</small>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}
