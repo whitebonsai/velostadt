@@ -16,7 +16,6 @@ services:
 
   mariadb:
     image: mariadb:latest
-    container_name: mariadb-velostadt
 
     environment:
       MARIADB_ROOT_PASSWORD: "P4_DbW3!V3l0St@dt"
