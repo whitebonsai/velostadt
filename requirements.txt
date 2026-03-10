@@ -7,3 +7,4 @@ PyJWT>=2.8
 python-dotenv>=1.0
 gunicorn>=21.2
 cryptography>=41.0
+flask-swagger-ui>=4.11

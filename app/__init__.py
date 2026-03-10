@@ -37,11 +37,19 @@ def create_app():
     from .controllers.fahrzeuge import fahrzeuge_bp
     from .controllers.fahrten import fahrten_bp
     from .controllers.api import api_bp
+    from flask_swagger_ui import get_swaggerui_blueprint
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
     app.register_blueprint(fahrzeuge_bp)
     app.register_blueprint(fahrten_bp)
     app.register_blueprint(api_bp, url_prefix="/api")
+
+    swagger_ui = get_swaggerui_blueprint(
+        "/api/docs",
+        "/static/swagger.yaml",
+        config={"app_name": "Velostadt API"},
+    )
+    app.register_blueprint(swagger_ui, url_prefix="/api/docs")
 
     return app
