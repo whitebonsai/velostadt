@@ -26,8 +26,8 @@ Als Technologieplattform wurde ein Linux-Server eingesetzt, auf dem der Python-W
 | Web-URL | `http://<IP-Adresse>:5000` |
 | API-Basis | `http://<IP-Adresse>:5000/api` |
 | API-Dokumentation (Swagger) | `http://<IP-Adresse>:5000/api/docs` |
-| Test-Login Nutzer | E-Mail: `nutzer@velostadt.ch` / Passwort: `Test1234` |
-| Test-Login Anbieter | E-Mail: `anbieter@velostadt.ch` / Passwort: `Test1234` |
+| Test-Login Nutzer | E-Mail: `nutzer1@velostadt.ch` / Passwort: `Test1234` |
+| Test-Login Anbieter | E-Mail: `anbieter1@velostadt.ch` / Passwort: `Test1234` |
 | GitHub Repository | `https://github.com/<username>/velostadt2` |
 
 ---
