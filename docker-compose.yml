@@ -1,4 +1,19 @@
 services:
+  web:
+    image: velostadt:latest
+    container_name: velostadt-web
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: "mysql+pymysql://velouser:velopass@mariadb/velostadt"
+      SECRET_KEY: "velostadt-dev-secret-change-in-prod"
+      JWT_SECRET: "velostadt-jwt-secret-change-in-prod"
+      TZ: Europe/Zurich
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: unless-stopped
+
   mariadb:
     image: mariadb:latest
     container_name: mariadb-velostadt
