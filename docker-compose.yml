@@ -1,6 +1,6 @@
 services:
   web:
-    image: velostadt:latest
+    image: babad00k27/velostadt:latest
     container_name: velostadt-web
     ports:
       - "5000:5000"
