@@ -10,8 +10,7 @@ services:
       JWT_SECRET: "velostadt-jwt-secret-change-in-prod"
       TZ: Europe/Zurich
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
     restart: unless-stopped
 
   mariadb:
@@ -33,9 +32,3 @@ services:
       - "3306:3306"
 
     restart: unless-stopped
-
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pP4_DbW3!V3l0St@dt"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
