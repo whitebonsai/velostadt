@@ -26,6 +26,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('fahrzeuge.neu') }}">+ Fahrzeug</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/api/docs">API Docs</a>
+          </li>
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('main.dashboard') }}">Dashboard</a>
@@ -50,9 +53,6 @@
               <li><a class="dropdown-item" href="{{ url_for('auth.register_benutzer') }}">Als Nutzer</a></li>
               <li><a class="dropdown-item" href="{{ url_for('auth.register_anbieter') }}">Als Anbieter</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api/docs">API Docs</a>
           </li>
         {% endif %}
       </ul>
