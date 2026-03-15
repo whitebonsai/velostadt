@@ -4,9 +4,6 @@
 {% block content %}
 <div class="px-4 py-5 text-center hero-section rounded-3 mb-5">
   <h1 class="display-5 fw-bold">Willkommen bei Velostadt</h1>
-  <p class="col-lg-6 mx-auto fs-5 text-muted">
-    Leihen Sie E-Scooter und E-Bikes schnell und einfach – direkt in Ihrer Stadt.
-  </p>
   {% if current_user.is_authenticated %}
     <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg px-4">Zum Dashboard</a>
   {% else %}
@@ -16,34 +13,4 @@
     </div>
   {% endif %}
 </div>
-
-<!-- <div class="row g-4 row-cols-1 row-cols-md-3">
-  <div class="col">
-    <div class="card h-100 border-0 shadow-sm">
-      <div class="card-body text-center">
-        <i class="bi bi-bicycle fs-1 text-primary mb-3 d-block"></i>
-        <h5 class="card-title">E-Scooter ausleihen</h5>
-        <p class="card-text text-muted">Wählen Sie einen verfügbaren Scooter in Ihrer Nähe und starten Sie sofort.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100 border-0 shadow-sm">
-      <div class="card-body text-center">
-        <i class="bi bi-receipt fs-1 text-primary mb-3 d-block"></i>
-        <h5 class="card-title">Minutengenaue Abrechnung</h5>
-        <p class="card-text text-muted">Zahlen Sie nur was Sie fahren – Basispreis plus Minutentarif.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100 border-0 shadow-sm">
-      <div class="card-body text-center">
-        <i class="bi bi-building fs-1 text-primary mb-3 d-block"></i>
-        <h5 class="card-title">Anbieter werden</h5>
-        <p class="card-text text-muted">Registrieren Sie Ihre Flotte und verdienen Sie mit Ihren Fahrzeugen.</p>
-      </div>
-    </div>
-  </div>
-</div> -->
 {% endblock %}

@@ -93,7 +93,7 @@ components:
 paths:
   /auth/login:
     post:
-      summary: Obtain a JWT token
+      summary: Erhalte ein JWT Token
       requestBody:
         required: true
         content:
@@ -102,7 +102,7 @@ paths:
               $ref: "#/components/schemas/LoginRequest"
       responses:
         "200":
-          description: Login successful
+          description: Login erfolgreich
           content:
             application/json:
               schema:
