@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Velostadt – E-Scooter & E-Bike Verleih{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 text-center hero-section rounded-3 mb-5">
+  <h1 class="display-5 fw-bold">Willkommen bei Velostadt</h1>
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg px-4">Zum Dashboard</a>
+  {% else %}
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="{{ url_for('auth.register_benutzer') }}" class="btn btn-primary btn-lg px-4">Jetzt registrieren</a>
+      <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg px-4">Anmelden</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

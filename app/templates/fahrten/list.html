@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Meine Fahrten – Velostadt{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Meine Fahrten</h2>
+
+{% if fahrten %}
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Datum</th>
+        <th>Fahrzeugtyp</th>
+        <th>Dauer</th>
+        <th>Kilometer</th>
+        <th>Kosten</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in fahrten %}
+      <tr>
+        <td>{{ f.startzeit.strftime('%d.%m.%Y %H:%M') }}</td>
+        <td>{{ f.fahrzeug.fahrzeugtyp.bezeichnung }}</td>
+        <td>
+          {% if f.dauer_minuten is not none %}
+            {{ "%.0f"|format(f.dauer_minuten) }} min
+          {% else %}
+            <span class="badge bg-success">aktiv</span>
+          {% endif %}
+        </td>
+        <td>{{ "%.1f"|format(f.kilometer|float) }} km</td>
+        <td>
+          {% if f.ist_aktiv %}
+            <span class="text-muted">–</span>
+          {% else %}
+            <strong>CHF {{ "%.2f"|format(f.preis|float) }}</strong>
+          {% endif %}
+        </td>
+        <td>
+          {% if f.ist_aktiv %}
+            <span class="badge bg-warning text-dark">aktiv</span>
+          {% elif f.abrechnung %}
+            <span class="badge bg-success">bezahlt</span>
+          {% else %}
+            <span class="badge bg-secondary">offen</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{{ url_for('fahrten.fahrt_detail', fahrt_id=f.fahrt_id) }}" class="btn btn-sm btn-outline-secondary">Details</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+  Sie haben noch keine Fahrten durchgeführt.
+  <a href="{{ url_for('fahrten.verfuegbare_fahrzeuge') }}" class="alert-link">Jetzt ausleihen</a>.
+</div>
+{% endif %}
+{% endblock %}

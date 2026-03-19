@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Verfügbare Fahrzeuge – Velostadt{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Verfügbare Fahrzeuge</h2>
+
+{% if fahrzeuge %}
+<div class="row g-4">
+  {% for f in fahrzeuge %}
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ f.fahrzeugtyp.bezeichnung }}</h5>
+        <p class="card-text text-muted small mb-1">
+          Akku:
+          <span class="{% if f.akku_prozent >= 60 %}text-success{% elif f.akku_prozent >= 30 %}text-warning{% else %}text-danger{% endif %} fw-semibold">
+            {{ f.akku_prozent }}%
+          </span>
+        </p>
+        {% if f.gps_lat and f.gps_long %}
+        <p class="card-text text-muted small mb-1">
+          GPS: {{ "%.4f"|format(f.gps_lat|float) }}, {{ "%.4f"|format(f.gps_long|float) }}
+        </p>
+        {% endif %}
+        <p class="card-text mb-3">
+          <span class="badge bg-success">CHF {{ "%.2f"|format(f.fahrzeugtyp.basispreis|float) }} Basis</span>
+          <span class="badge bg-primary">+ {{ "%.2f"|format(f.fahrzeugtyp.preis_pro_min|float) }}/min</span>
+        </p>
+        <form method="post" action="{{ url_for('fahrten.fahrt_start', fahrzeug_id=f.fahrzeug_id) }}">
+          <button type="submit" class="btn btn-success w-100">Ausleihen</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-warning">
+  Aktuell sind leider keine Fahrzeuge verfügbar. Bitte später wieder vorbeischauen.
+</div>
+{% endif %}
+{% endblock %}

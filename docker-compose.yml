@@ -1,0 +1,41 @@
+services:
+  web:
+    image: babad00k27/velostadt:latest
+    container_name: velostadt-web
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: "mysql+pymysql://velouser:velopass@mariadb/velostadt"
+      SECRET_KEY: "velostadt-dev-secret-change-in-prod"
+      JWT_SECRET: "velostadt-jwt-secret-change-in-prod"
+      FLASK_APP: "run.py"
+      TZ: Europe/Zurich
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mariadb:
+    image: mariadb:latest
+
+    environment:
+      MARIADB_ROOT_PASSWORD: "P4_DbW3!V3l0St@dt"
+      MARIADB_DATABASE: "velostadt"
+      MARIADB_USER: "velouser"
+      MARIADB_PASSWORD: "velopass"
+      TZ: Europe/Zurich
+
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/initdb:/docker-entrypoint-initdb.d
+
+    ports:
+      - "3306:3306"
+
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped

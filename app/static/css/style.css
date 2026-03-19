@@ -1,0 +1,62 @@
+/* Velostadt – custom styles */
+
+/* ── Accent color: override Bootstrap primary to red ── */
+:root {
+  --bs-primary:           #c0392b;
+  --bs-primary-rgb:       192, 57, 43;
+  --bs-link-color:        #c0392b;
+  --bs-link-color-rgb:    192, 57, 43;
+  --bs-link-hover-color:  #a93226;
+}
+
+.btn-primary {
+  --bs-btn-bg:                #c0392b;
+  --bs-btn-border-color:      #c0392b;
+  --bs-btn-hover-bg:          #a93226;
+  --bs-btn-hover-border-color:#a93226;
+  --bs-btn-active-bg:         #a93226;
+  --bs-btn-active-border-color:#a93226;
+  --bs-btn-disabled-bg:       #c0392b;
+  --bs-btn-disabled-border-color: #c0392b;
+}
+
+.btn-outline-primary {
+  --bs-btn-color:             #c0392b;
+  --bs-btn-border-color:      #c0392b;
+  --bs-btn-hover-bg:          #c0392b;
+  --bs-btn-hover-border-color:#c0392b;
+  --bs-btn-active-bg:         #c0392b;
+}
+
+.bg-primary        { background-color: #c0392b !important; }
+.text-primary      { color: #c0392b !important; }
+.border-primary    { border-color: #c0392b !important; }
+.badge.bg-primary  { background-color: #c0392b !important; }
+.alert-primary     { border-color: #c0392b40; background-color: #c0392b12; color: #7b1f16; }
+.alert-primary .alert-link { color: #7b1f16; }
+
+/* ── Layout ── */
+body {
+  background-color: #f8f9fa;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #c0392b18 0%, #c0392b06 100%);
+  border: 1px solid #c0392b22;
+  padding: 4rem 1rem;
+}
+
+.card {
+  border-radius: 0.75rem;
+}
+
+/* Battery progress bars */
+.progress {
+  border-radius: 999px;
+}
